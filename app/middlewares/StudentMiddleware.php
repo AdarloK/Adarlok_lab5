@@ -4,20 +4,17 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 /**
  * StudentMiddleware
  *
- * Protects the /student/profile route.
+ * Protects the /student/profile route. Access is only granted when
+ * the session flag 'portal_unlocked' has been set to true — which
+ * happens after a visitor submits the correct PIN on the student
+ * home page (see StudentController::verify()).
  *
- * Access condition (unique to this build): a session flag named
- * 'clearance_granted'. It is auto-granted the first time a visitor
- * loads the site, simulating a one-time "badge scan" — this keeps the
- * activity's request flow (Route -> Middleware -> Controller -> View)
- * fully testable in a browser without a login form.
- *
- * If the flag is ever missing or false, the visitor is bounced back
- * to /student with a denial message instead of reaching the profile.
- *
- * TODO (optional personalization): change the session key name and/or
- * the denial message below to make your access condition unique, per
- * the lab's Individualization Requirement.
+ * Request
+ *   v
+ * StudentMiddleware -- checks $_SESSION['portal_unlocked']
+ *   |
+ *   +-- YES -> next() -> StudentController::profile() -> view
+ *   +-- NO  -> redirect back to /student with a message
  */
 class StudentMiddleware extends Middleware
 {
@@ -33,18 +30,12 @@ class StudentMiddleware extends Middleware
             session_start();
         }
 
-        // Unique access condition for this activity.
-        if (!isset($_SESSION['clearance_granted'])) {
-            $_SESSION['clearance_granted'] = true;
-        }
-
-        if ($_SESSION['clearance_granted'] === true) {
-            // Access allowed -> continue the pipeline to the controller
+        if (!empty($_SESSION['portal_unlocked']) && $_SESSION['portal_unlocked'] === true) {
             return $next();
         }
 
-        // Access denied -> redirect back to the student home page
-        $_SESSION['access_message'] = 'Clearance denied by StudentMiddleware: badge scan required before viewing the profile.';
+        // Access denied: leave a message for the home page and redirect there
+        $_SESSION['access_message'] = 'Locked — /student/profile is currently blocked.';
         redirect('student');
         exit;
     }

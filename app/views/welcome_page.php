@@ -14,18 +14,21 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         :root {
-            --lava: #dd4814;
-            --lava-dim: #b83a10;
-            --lava-glow: rgba(221,72,20,0.15);
-            --lava-glow-strong: rgba(221,72,20,0.25);
-            --bg: #0a0a0b;
-            --bg2: #111113;
-            --bg3: #18181b;
-            --border: rgba(255,255,255,0.07);
-            --border-hot: rgba(221,72,20,0.35);
-            --text: #f4f4f5;
-            --text-muted: #71717a;
-            --text-dim: #3f3f46;
+            --brown: #6F4E37;
+            --brown-dim: #5a3f2d;
+            --brown-glow: rgba(111,78,55,0.15);
+            --brown-glow-strong: rgba(111,78,55,0.25);
+            --tan: #D4A574;
+            --cream: #F5E6D3;
+            --dark-brown: #3E2723;
+            --bg: #faf8f5;
+            --bg2: #f5f2ed;
+            --bg3: #ede8e0;
+            --border: rgba(111,78,55,0.12);
+            --border-hot: rgba(111,78,55,0.35);
+            --text: #2d2520;
+            --text-muted: #7a6e63;
+            --text-dim: #a89a8a;
             --mono: 'JetBrains Mono', monospace;
             --sans: 'Unbounded', sans-serif;
         }
@@ -76,12 +79,12 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
         .orb-1 {
             width: 600px; height: 600px;
             top: -200px; left: -100px;
-            background: radial-gradient(circle, rgba(221,72,20,0.12) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(111,78,55,0.12) 0%, transparent 70%);
         }
         .orb-2 {
             width: 400px; height: 400px;
             top: 200px; right: -100px;
-            background: radial-gradient(circle, rgba(221,72,20,0.07) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(111,78,55,0.07) 0%, transparent 70%);
         }
 
         /* ── LAYOUT ── */
@@ -120,13 +123,13 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 
         .nav-logo .flame {
             width: 28px; height: 28px;
-            background: var(--lava);
+            background: var(--brown);
             border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 14px;
-            box-shadow: 0 0 20px var(--lava-glow-strong);
+            box-shadow: 0 0 20px var(--brown-glow-strong);
         }
 
         .nav-links {
@@ -148,8 +151,8 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
         .nav-links a:hover { color: var(--text); background: var(--bg3); }
 
         .nav-links .btn-nav {
-            color: var(--text);
-            background: var(--lava);
+            color: #fff;
+            background: var(--brown);
             padding: 0.4rem 1rem;
             border-radius: 6px;
             margin-left: 0.5rem;
@@ -157,8 +160,8 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
         }
 
         .nav-links .btn-nav:hover {
-            background: var(--lava-dim);
-            box-shadow: 0 0 20px var(--lava-glow-strong);
+            background: var(--brown-dim);
+            box-shadow: 0 0 20px var(--brown-glow-strong);
         }
 
         /* ── HERO ── */
@@ -173,9 +176,9 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            background: rgba(221,72,20,0.1);
+            background: rgba(111,78,55,0.1);
             border: 1px solid var(--border-hot);
-            color: #f97316;
+            color: var(--brown);
             font-size: 0.75rem;
             font-weight: 600;
             letter-spacing: 0.08em;
@@ -189,15 +192,15 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
         .badge::before {
             content: '';
             width: 6px; height: 6px;
-            background: var(--lava);
+            background: var(--brown);
             border-radius: 50%;
-            box-shadow: 0 0 8px var(--lava);
+            box-shadow: 0 0 8px var(--brown);
             animation: pulse 2s ease-in-out infinite;
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 1; box-shadow: 0 0 8px var(--lava); }
-            50% { opacity: 0.5; box-shadow: 0 0 3px var(--lava); }
+            0%, 100% { opacity: 1; box-shadow: 0 0 8px var(--brown); }
+            50% { opacity: 0.5; box-shadow: 0 0 3px var(--brown); }
         }
 
         .hero h1 {
@@ -208,7 +211,7 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
             margin-bottom: 1.5rem;
         }
 
-        .hero h1 .word-lava { color: var(--lava); }
+        .hero h1 .word-lava { color: var(--brown); }
         .hero h1 .word-lust {
             color: transparent;
             -webkit-text-stroke: 1.5px rgba(255,255,255,0.3);
@@ -247,14 +250,14 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
         }
 
         .btn-primary {
-            background: var(--lava);
+            background: var(--brown);
             color: #fff;
-            box-shadow: 0 0 0 0 var(--lava-glow);
+            box-shadow: 0 0 0 0 var(--brown-glow);
         }
 
         .btn-primary:hover {
-            background: var(--lava-dim);
-            box-shadow: 0 0 30px var(--lava-glow-strong), 0 4px 15px rgba(0,0,0,0.3);
+            background: var(--brown-dim);
+            box-shadow: 0 0 30px var(--brown-glow-strong), 0 4px 15px rgba(0,0,0,0.3);
             transform: translateY(-1px);
         }
 
@@ -293,7 +296,7 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
             line-height: 1;
         }
 
-        .stat-value span { color: var(--lava); }
+        .stat-value span { color: var(--brown); }
 
         .stat-label {
             font-size: 0.78rem;
@@ -315,7 +318,7 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
             font-family: var(--mono);
             font-size: 0.72rem;
             font-weight: 500;
-            color: var(--lava);
+            color: var(--brown);
             text-transform: uppercase;
             letter-spacing: 0.12em;
             margin-bottom: 0.75rem;
@@ -362,7 +365,7 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
             position: absolute;
             top: 0; left: 0; right: 0;
             height: 1px;
-            background: linear-gradient(90deg, transparent, var(--lava-glow-strong), transparent);
+            background: linear-gradient(90deg, transparent, var(--brown-glow-strong), transparent);
             opacity: 0;
             transition: opacity 0.3s;
         }
@@ -471,10 +474,10 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
         .dir-item:hover {
             border-color: var(--border-hot);
             color: var(--text);
-            background: rgba(221,72,20,0.05);
+            background: rgba(111,78,55,0.05);
         }
 
-        .dir-item .dir-icon { color: var(--lava); font-size: 0.9rem; }
+        .dir-item .dir-icon { color: var(--brown); font-size: 0.9rem; }
 
         /* ── FOOTER ── */
         footer {
@@ -517,7 +520,7 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
             transition: color 0.2s;
         }
 
-        .footer-links a:hover { color: var(--lava); }
+        .footer-links a:hover { color: var(--brown); }
 
         /* ── DIVIDER ── */
         .divider {

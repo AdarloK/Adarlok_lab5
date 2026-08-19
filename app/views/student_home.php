@@ -4,153 +4,398 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= htmlspecialchars($title ?? 'Student Home') ?></title>
+    <title><?= htmlspecialchars($page_title ?? 'Student Portal') ?></title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Archivo:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,600;1,700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         :root {
-            --ink: #111111;
-            --paper: #FFF7E8;
-            --yellow: #FFD23F;
-            --coral: #FF6B4A;
-            --teal: #2EC4B6;
-            --shadow: 6px 6px 0 var(--ink);
+            --brown: #6F4E37;
+            --brown-light: #A0826D;
+            --tan: #D4A574;
+            --cream: #F5E6D3;
+            --dark-brown: #3E2723;
+            --gold: #D4AF37;
+            --text-dark: #2d2520;
+            --muted: #7a6e63;
+            --white: #ffffff;
         }
 
         body {
-            font-family: 'Archivo', sans-serif;
-            background: var(--paper);
-            background-image:
-                radial-gradient(var(--ink) 1px, transparent 1px);
-            background-size: 26px 26px;
-            background-position: -6px -6px;
-            color: var(--ink);
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, var(--tan) 0%, var(--brown-light) 60%, var(--brown) 100%);
+            color: var(--text-dark);
             min-height: 100vh;
+            padding: 32px 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .sparkle {
+            position: absolute;
+            font-size: 1.4rem;
+            opacity: 0.65;
+            animation: twinkle 3.2s ease-in-out infinite;
+            pointer-events: none;
+        }
+        .sparkle.s1 { top: 6%; left: 8%; animation-delay: 0s; }
+        .sparkle.s2 { top: 14%; right: 12%; font-size: 1.1rem; animation-delay: 0.6s; }
+        .sparkle.s3 { bottom: 10%; left: 14%; font-size: 1.6rem; animation-delay: 1.2s; }
+        .sparkle.s4 { bottom: 22%; right: 8%; animation-delay: 1.8s; }
+        .sparkle.s5 { top: 46%; left: 3%; font-size: 1rem; animation-delay: 2.4s; }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.25; transform: scale(0.85) rotate(0deg); }
+            50% { opacity: 0.9; transform: scale(1.15) rotate(15deg); }
+        }
+
+        .layout {
+            max-width: 1040px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 28px;
+            align-items: stretch;
+        }
+
+        @media (max-width: 860px) {
+            .layout { grid-template-columns: 1fr; }
+        }
+
+        /* ---------- Left: hero panel ---------- */
+        .hero {
+            background: rgba(255,255,255,0.55);
+            border: 1px solid rgba(255,255,255,0.8);
+            border-radius: 26px;
+            padding: 44px 40px;
+            backdrop-filter: blur(6px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .brand .glyph {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--brown-light), var(--brown));
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 24px;
+            font-size: 1.2rem;
+            color: #fff;
+            box-shadow: 0 6px 16px rgba(111,78,55,0.5);
         }
 
-        .panel {
-            max-width: 640px;
-            width: 100%;
-            background: #fff;
-            border: 3px solid var(--ink);
-            border-radius: 4px;
-            padding: 44px 40px;
-            box-shadow: var(--shadow);
-        }
-
-        .stamp {
-            display: inline-block;
-            font-family: 'Space Grotesk', sans-serif;
+        .brand .label b {
+            display: block;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
             font-weight: 700;
-            font-size: 0.72rem;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            background: var(--yellow);
-            border: 2px solid var(--ink);
-            padding: 6px 14px;
-            border-radius: 3px;
-            box-shadow: 3px 3px 0 var(--ink);
-            margin-bottom: 22px;
-            transform: rotate(-2deg);
+            font-size: 1.15rem;
+        }
+
+        .brand .label small {
+            display: block;
+            font-size: 0.68rem;
+            letter-spacing: 0.14em;
+            color: var(--muted);
+            font-weight: 600;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            color: var(--brown);
+            background: rgba(255,255,255,0.7);
+            border: 1px solid var(--brown);
+            padding: 5px 12px;
+            border-radius: 999px;
+            margin-bottom: 18px;
         }
 
         h1 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-weight: 600;
             font-size: 2rem;
-            line-height: 1.2;
+            line-height: 1.3;
             margin-bottom: 16px;
+            color: var(--text-dark);
         }
 
-        h1 span {
-            background: var(--teal);
-            padding: 0 6px;
-            box-decoration-break: clone;
-            -webkit-box-decoration-break: clone;
-        }
-
-        p.lead {
-            font-size: 1rem;
-            line-height: 1.65;
-            max-width: 480px;
-            margin: 0 0 30px;
-        }
-
-        .msg {
-            font-size: 0.85rem;
-            font-weight: 600;
-            padding: 12px 16px;
-            border: 2px solid var(--ink);
-            border-radius: 3px;
-            background: var(--yellow);
-            margin-bottom: 26px;
-        }
-
-        nav {
-            display: flex;
-            gap: 14px;
-            flex-wrap: wrap;
-        }
-
-        nav a {
-            text-decoration: none;
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            color: var(--ink);
+        .hero p.lead {
+            color: var(--muted);
             font-size: 0.95rem;
-            padding: 12px 26px;
-            border: 3px solid var(--ink);
-            border-radius: 3px;
-            box-shadow: 4px 4px 0 var(--ink);
-            transition: transform 0.1s ease, box-shadow 0.1s ease;
+            line-height: 1.7;
+            max-width: 420px;
         }
 
-        nav a.primary-link { background: var(--coral); color: #fff; }
-        nav a.secondary-link { background: #fff; }
-
-        nav a:hover {
-            transform: translate(2px, 2px);
-            box-shadow: 2px 2px 0 var(--ink);
+        .route-trace {
+            margin-top: 36px;
+            font-size: 0.72rem;
+            color: var(--muted);
+            border-top: 1px dashed rgba(147,120,159,0.4);
+            padding-top: 16px;
+            line-height: 1.7;
         }
 
-        footer {
-            margin-top: 30px;
-            font-size: 0.75rem;
+        .route-trace code {
+            background: rgba(255,255,255,0.6);
+            padding: 1px 6px;
+            border-radius: 6px;
             font-weight: 600;
-            letter-spacing: 0.02em;
+            color: var(--text-dark);
+        }
+
+        /* ---------- Right: access terminal ---------- */
+        .terminal {
+            background: var(--white);
+            border-radius: 26px;
+            box-shadow: 0 24px 60px rgba(150,110,180,0.28);
+            padding: 34px 34px 30px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 22px;
+        }
+
+        .tabs a {
+            flex: 1;
+            text-align: center;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.78rem;
+            letter-spacing: 0.05em;
+            padding: 10px 0;
+            border-radius: 12px;
+            color: var(--muted);
+        }
+
+        .tabs a.active {
+            background: linear-gradient(135deg, var(--brown-light), var(--brown));
+            color: #fff;
+        }
+
+        .tabs a.inactive {
+            background: #faf3fb;
+        }
+
+        .terminal .kicker {
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            color: var(--brown);
+            margin-bottom: 6px;
+        }
+
+        .terminal h2 {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.35rem;
+            margin-bottom: 10px;
+        }
+
+        .terminal .desc {
+            font-size: 0.85rem;
+            color: var(--muted);
+            line-height: 1.6;
+            margin-bottom: 18px;
+        }
+
+        .terminal .desc code {
+            background: #faf3fb;
+            padding: 1px 6px;
+            border-radius: 6px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .flash {
+            font-size: 0.82rem;
+            font-weight: 600;
+            padding: 12px 14px;
+            border-radius: 12px;
+            margin-bottom: 18px;
+        }
+
+        .flash.ok {
+            background: #eafaf0;
+            color: #1f8a4c;
+            border: 1px solid #bfe9cf;
+        }
+
+        .flash.err {
+            background: #fce8e8;
+            color: #8B4513;
+            border: 1px solid #deb0b0;
+        }
+
+        .flash.locked {
+            background: #f4ede4;
+            color: var(--brown);
+            border: 1px solid var(--tan);
+        }
+
+        form label {
+            display: block;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            color: var(--muted);
+            margin-bottom: 8px;
+        }
+
+        .pin-row {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        input[name="pin"] {
+            flex: 1;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+            font-size: 1.4rem;
+            letter-spacing: 0.6em;
+            text-align: center;
+            padding: 14px 10px 14px 22px;
+            border-radius: 14px;
+            border: 2px solid var(--tan);
+            background: #fdf9ff;
+            color: var(--text-dark);
+            outline: none;
+        }
+
+        input[name="pin"]:focus {
+            border-color: var(--brown);
+        }
+
+        button[type="submit"] {
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: #fff;
+            background: linear-gradient(135deg, var(--brown-light), var(--brown));
+            border: none;
+            padding: 14px 20px;
+            border-radius: 14px;
+            cursor: pointer;
+            box-shadow: 0 10px 22px rgba(111,78,55,0.45);
+            transition: transform 0.15s ease;
+        }
+
+        button[type="submit"]:hover { transform: translateY(-2px); }
+
+        .hint {
+            margin-top: 16px;
+            font-size: 0.72rem;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .profile-link {
+            display: inline-block;
+            margin-top: 18px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.82rem;
+            color: var(--brown);
         }
     </style>
 </head>
 <body>
-    <div class="panel">
-        <span class="stamp">LavaLust &middot; Access Console</span>
-        <h1>Hi, I'm <span>CHANGE_ME</span> &mdash; welcome to my student page.</h1>
-        <p class="lead">
-            This is a simple Student Information Page built with LavaLust's
-            routing, controllers, views, and middleware. Badge clearance is
-            granted automatically for this activity — tap the button below
-            to view my protected profile.
-        </p>
+    <span class="sparkle s1">✨</span>
+    <span class="sparkle s2">⭐</span>
+    <span class="sparkle s3">✨</span>
+    <span class="sparkle s4">⭐</span>
+    <span class="sparkle s5">✨</span>
 
-        <?php if (!empty($_SESSION['access_message'])): ?>
-            <div class="msg">
-                <?= htmlspecialchars($_SESSION['access_message']) ?>
+    <div class="layout">
+        <!-- LEFT: hero -->
+        <div class="hero">
+            <div>
+                <div class="brand">
+                    <div class="glyph">✨</div>
+                    <div class="label">
+                        <b>Kashiofeya Portal</b>
+                        <small>STUDENT ACCESS SYSTEM</small>
+                    </div>
+                </div>
+
+                <span class="eyebrow">MIDDLEWARE ZONE</span>
+                <h1>Route-level access is enforced before the profile view ever renders.</h1>
+                <p class="lead">
+                    This is a simple Student Information Page built with LavaLust's
+                    routing, controllers, views, and middleware. Submit the access
+                    PIN on the right to unlock <code>/student/profile</code>.
+                </p>
             </div>
-            <?php unset($_SESSION['access_message']); ?>
-        <?php endif; ?>
 
-        <nav>
-            <a class="primary-link" href="<?= site_url('student') ?>">Home</a>
-            <a class="secondary-link" href="<?= site_url('student/profile') ?>">Student Profile</a>
-        </nav>
+            <div class="route-trace">
+                <code>GET /student</code> &middot; <code>POST /student/verify</code> &middot; <code>GET /student/profile</code><br>
+                Guarded by <strong>StudentMiddleware</strong> — unauthorized requests are redirected here.
+            </div>
+        </div>
 
-        <footer>Built with LavaLust PHP Framework &middot; Laboratory Activity 3</footer>
+        <!-- RIGHT: access terminal -->
+        <div class="terminal">
+            <div class="tabs">
+                <a class="active" href="<?= site_url('student') ?>">ACCESS</a>
+                <a class="inactive" href="<?= site_url('student/profile') ?>">PROFILE</a>
+            </div>
+
+            <div class="kicker">ACCESS TERMINAL</div>
+            <h2>Kashiofeya Student Portal</h2>
+            <p class="desc">
+                This route is guarded by <code>StudentMiddleware</code>.
+                Submit the access PIN to unlock <code>/student/profile</code>.
+            </p>
+
+            <?php if (!empty($message)):
+                $tone = 'locked';
+                if (stripos($message, 'granted') !== false) $tone = 'ok';
+                elseif (stripos($message, 'incorrect') !== false) $tone = 'err';
+            ?>
+                <div class="flash <?= $tone ?>"><?= htmlspecialchars($message) ?></div>
+            <?php elseif (!$unlocked): ?>
+                <div class="flash locked">Locked — /student/profile is currently blocked.</div>
+            <?php endif; ?>
+
+            <form action="<?= site_url('student/verify') ?>" method="post">
+                <label for="pin">ACCESS PIN</label>
+                <div class="pin-row">
+                    <input type="text" id="pin" name="pin" inputmode="numeric" maxlength="4"
+                           autocomplete="off" placeholder="&bull;&bull;&bull;&bull;" required>
+                    <button type="submit">UNLOCK</button>
+                </div>
+            </form>
+
+            <p class="hint">
+                Enter the correct PIN to unlock the profile view. An incorrect PIN
+                keeps <code>StudentMiddleware</code> in control and redirects the
+                request straight back to this screen — this is this student's own
+                access condition for the lab activity.
+            </p>
+
+            <?php if ($unlocked): ?>
+                <a class="profile-link" href="<?= site_url('student/profile') ?>">Go to Student Profile &rarr;</a>
+            <?php endif; ?>
+        </div>
     </div>
 </body>
 </html>

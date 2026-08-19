@@ -4,38 +4,79 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 /**
  * StudentController
  *
- * Handles the student home page (/student) and the middleware-protected
- * student profile page (/student/profile).
- *
- * ------------------------------------------------------------------
- * HOW TO PERSONALIZE THIS FILE
- * ------------------------------------------------------------------
- * Everything you need to change for the laboratory activity's
- * "Individualization Requirement" lives in the profile() method below.
- * Replace every placeholder value with your own real information.
- * See README.md ("Personalize Your Information") for the full guide.
+ * Handles:
+ *   GET  /student           -> access terminal (PIN gate)
+ *   POST /student/verify    -> checks the submitted PIN
+ *   GET  /student/lock      -> revokes access (test the middleware again)
+ *   GET  /student/profile   -> protected by StudentMiddleware
  */
 class StudentController extends Controller
 {
+    // Access condition for this activity: a 4-digit PIN.
+    // TODO: change this to your own PIN if you want.
+    private $portal_pin = '0125';
+
+    public function before_action()
+    {
+        if (session_status() !== PHP_SESSION_ACTIVE) {
+            session_start();
+        }
+    }
+
     public function index()
     {
-        // TODO: change the page title to something unique to you
-        $data['title'] = 'CHANGE_ME — My Student Access Console';
+        $data = [
+            'page_title' => 'Kashiofeya Student Portal',
+            'unlocked'   => !empty($_SESSION['portal_unlocked']),
+            'message'    => $_SESSION['access_message'] ?? null,
+        ];
+
+        // Clear the one-time flash message after reading it
+        unset($_SESSION['access_message']);
+
         $this->call->view('student_home', $data);
+    }
+
+    public function verify()
+    {
+        $pin = isset($_POST['pin']) ? trim($_POST['pin']) : '';
+
+        if ($pin === $this->portal_pin) {
+            $_SESSION['portal_unlocked'] = true;
+            $_SESSION['access_message'] = 'Access granted. StudentMiddleware verified your PIN.';
+            redirect('student/profile');
+        } else {
+            $_SESSION['portal_unlocked'] = false;
+            $_SESSION['access_message'] = 'Incorrect PIN. StudentMiddleware blocked access to the profile page.';
+            redirect('student');
+        }
+    }
+
+    public function lock()
+    {
+        $_SESSION['portal_unlocked'] = false;
+        $_SESSION['access_message'] = 'Portal locked. Profile access has been revoked.';
+        redirect('student');
     }
 
     public function profile()
     {
         $student = [
             // ===== REQUIRED FIELDS — replace with YOUR OWN information =====
-            'student_id'  => 'MCC2024-00050',
-            'name'        => 'Sabina Rheazel B. Elumba',
+            'student_id'  => 'MCC2024-00009',
+            'name'        => 'Kashiofeya S. Adarlo',
             'course'      => 'BS Information Technology',
             'year'        => '3rd Year',
             'section'     => '3F1',
-            'email'       => 'sabinarheazelelumba@gmail.com',
+            'email'       => 'kashiofeyaa@gmail.com',
 
-            
+            // ===== OPTIONAL FIELDS — uncomment/edit, or leave out =====
+            // 'address'     => 'City, Province, Philippines',
+            // 'contact'     => '09XX-XXX-XXXX',
+            // 'skills'      => 'List your own skills here',
+            // 'hobbies'     => 'List your own hobbies here',
+            // 'description' => 'A short one- or two-sentence bio about yourself.',
+            // 'social'      => 'github.com/your-username',
         ];
 
         $this->call->view('student_profile', $student);
