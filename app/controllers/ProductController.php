@@ -13,8 +13,19 @@ class ProductController extends Controller
 
     public function index()
     {
+        try {
+            $products = ProductModel::order_by('created_at', 'DESC');
+        } catch (Throwable $exception) {
+            http_response_code(500);
+            $this->call->view('products/index', [
+                'products' => [],
+                'message' => 'Database error: ' . $exception->getMessage(),
+            ]);
+            return;
+        }
+
         $this->call->view('products/index', [
-            'products' => ProductModel::order_by('created_at', 'DESC'),
+            'products' => $products,
             'message' => $_SESSION['product_message'] ?? null,
         ]);
         unset($_SESSION['product_message']);

@@ -54,6 +54,7 @@ $router->get('/student/profile', 'StudentController::profile')->middleware('Stud
 $router->get('/login', 'AuthController::login');
 $router->post('/login', 'AuthController::authenticate');
 $router->get('/logout', 'AuthController::logout');
+$router->get('/health', 'HealthController::index');
 
 $router->group(['prefix' => 'products', 'middleware' => 'AuthMiddleware'], function ($router) {
 	$router->get('', 'ProductController::index');
