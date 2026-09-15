@@ -64,7 +64,10 @@ $config['version']                 = '4.6.0';
 | -------------------------------------------------------------------
 | Values: development and production
 */
-$config['environment'] = getenv('APP_ENV') ?: 'development';
+$environment = strtolower(getenv('APP_ENV') ?: 'production');
+$config['environment'] = in_array($environment, ['development', 'testing', 'production'], true)
+	? $environment
+	: 'production';
 
 /*
 |--------------------------------------------------------------------------
