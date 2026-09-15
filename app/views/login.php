@@ -1,0 +1,6 @@
+<?php defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed'); ?>
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Sign in | Products</title><style>body{font-family:Arial,sans-serif;background:#eef2f3;color:#18323a;display:grid;place-items:center;min-height:100vh;margin:0}.panel{background:#fff;padding:2rem;width:min(90%,360px);box-shadow:0 12px 35px #18323a22}h1{margin-top:0}label{display:block;margin:1rem 0 .35rem}input{width:100%;padding:.7rem;border:1px solid #b8c5c8;box-sizing:border-box}button{margin-top:1.2rem;width:100%;padding:.75rem;background:#0c6b70;color:#fff;border:0;cursor:pointer}.message{background:#fce8e6;padding:.7rem;color:#9b2c26}</style></head>
+<body><main class="panel"><h1>Product manager</h1><?php if ($message): ?><p class="message"><?= htmlspecialchars($message) ?></p><?php endif; ?><form method="post" action="<?= site_url('login') ?>"><label for="username">Username</label><input id="username" name="username" required autocomplete="username"><label for="password">Password</label><input id="password" type="password" name="password" required autocomplete="current-password"><button type="submit">Sign in</button></form></main></body>
+</html>

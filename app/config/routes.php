@@ -44,12 +44,22 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 */
 /** @var object $router **/
 
-// Landing page: show the student home page immediately at the root URL
-// (e.g. https://your-app.onrender.com/) instead of the default LavaLust
-// welcome screen.
 $router->get('/', 'StudentController::index');
 
 $router->get('/student', 'StudentController::index');
 $router->post('/student/verify', 'StudentController::verify');
 $router->get('/student/lock', 'StudentController::lock');
 $router->get('/student/profile', 'StudentController::profile')->middleware('StudentMiddleware');
+
+$router->get('/login', 'AuthController::login');
+$router->post('/login', 'AuthController::authenticate');
+$router->get('/logout', 'AuthController::logout');
+
+$router->group(['prefix' => 'products', 'middleware' => 'AuthMiddleware'], function ($router) {
+	$router->get('', 'ProductController::index');
+	$router->get('/create', 'ProductController::create');
+	$router->post('/create', 'ProductController::store');
+	$router->get('/edit/{id}', 'ProductController::edit');
+	$router->post('/edit/{id}', 'ProductController::update');
+	$router->post('/delete/{id}', 'ProductController::delete');
+});

@@ -41,24 +41,12 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 | Used for adding middlewares
 |
 */
-/*
-| -------------------------------------------------------------------
-| Register the middleware map
-| -------------------------------------------------------------------
-| Each key is the name used in routes.php / ->middleware('Name'),
-| and each value is an instance of that middleware class.
-|
-| The key must exist BEFORE any middleware class is instantiated,
-| since the base Middleware constructor checks for it via get_config().
-*/
 $config['middlewares'] = [];
-
-// The base Middleware class may not be autoloaded yet this early in the
-// bootstrap process, so load it explicitly before any subclass of it.
 require_once SYSTEM_DIR . 'kernel/Middleware.php';
-
 require_once APP_DIR . 'middlewares/StudentMiddleware.php';
+require_once APP_DIR . 'middlewares/AuthMiddleware.php';
 
 $config['middlewares'] = [
     'StudentMiddleware' => new StudentMiddleware(),
+    'AuthMiddleware' => new AuthMiddleware(),
 ];

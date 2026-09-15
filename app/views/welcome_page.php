@@ -14,6 +14,7 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         :root {
+<<<<<<< HEAD
             --brown: #6F4E37;
             --brown-dim: #5a3f2d;
             --brown-glow: rgba(111,78,55,0.15);
@@ -29,6 +30,20 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
             --text: #2d2520;
             --text-muted: #7a6e63;
             --text-dim: #a89a8a;
+=======
+            --lava: #dd4814;
+            --lava-dim: #b83a10;
+            --lava-glow: rgba(221,72,20,0.15);
+            --lava-glow-strong: rgba(221,72,20,0.25);
+            --bg: #0a0a0b;
+            --bg2: #111113;
+            --bg3: #18181b;
+            --border: rgba(255,255,255,0.07);
+            --border-hot: rgba(221,72,20,0.35);
+            --text: #f4f4f5;
+            --text-muted: #71717a;
+            --text-dim: #3f3f46;
+>>>>>>> 04312585559daad918654f8850ba8079f14ab852
             --mono: 'JetBrains Mono', monospace;
             --sans: 'Unbounded', sans-serif;
         }
@@ -79,12 +94,20 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
         .orb-1 {
             width: 600px; height: 600px;
             top: -200px; left: -100px;
+<<<<<<< HEAD
             background: radial-gradient(circle, rgba(111,78,55,0.12) 0%, transparent 70%);
+=======
+            background: radial-gradient(circle, rgba(221,72,20,0.12) 0%, transparent 70%);
+>>>>>>> 04312585559daad918654f8850ba8079f14ab852
         }
         .orb-2 {
             width: 400px; height: 400px;
             top: 200px; right: -100px;
+<<<<<<< HEAD
             background: radial-gradient(circle, rgba(111,78,55,0.07) 0%, transparent 70%);
+=======
+            background: radial-gradient(circle, rgba(221,72,20,0.07) 0%, transparent 70%);
+>>>>>>> 04312585559daad918654f8850ba8079f14ab852
         }
 
         /* ── LAYOUT ── */
@@ -123,13 +146,21 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 
         .nav-logo .flame {
             width: 28px; height: 28px;
+<<<<<<< HEAD
             background: var(--brown);
+=======
+            background: var(--lava);
+>>>>>>> 04312585559daad918654f8850ba8079f14ab852
             border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 14px;
+<<<<<<< HEAD
             box-shadow: 0 0 20px var(--brown-glow-strong);
+=======
+            box-shadow: 0 0 20px var(--lava-glow-strong);
+>>>>>>> 04312585559daad918654f8850ba8079f14ab852
         }
 
         .nav-links {
@@ -151,8 +182,13 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
         .nav-links a:hover { color: var(--text); background: var(--bg3); }
 
         .nav-links .btn-nav {
+<<<<<<< HEAD
             color: #fff;
             background: var(--brown);
+=======
+            color: var(--text);
+            background: var(--lava);
+>>>>>>> 04312585559daad918654f8850ba8079f14ab852
             padding: 0.4rem 1rem;
             border-radius: 6px;
             margin-left: 0.5rem;
@@ -160,8 +196,13 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
         }
 
         .nav-links .btn-nav:hover {
+<<<<<<< HEAD
             background: var(--brown-dim);
             box-shadow: 0 0 20px var(--brown-glow-strong);
+=======
+            background: var(--lava-dim);
+            box-shadow: 0 0 20px var(--lava-glow-strong);
+>>>>>>> 04312585559daad918654f8850ba8079f14ab852
         }
 
         /* ── HERO ── */
@@ -176,9 +217,15 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
+<<<<<<< HEAD
             background: rgba(111,78,55,0.1);
             border: 1px solid var(--border-hot);
             color: var(--brown);
+=======
+            background: rgba(221,72,20,0.1);
+            border: 1px solid var(--border-hot);
+            color: #f97316;
+>>>>>>> 04312585559daad918654f8850ba8079f14ab852
             font-size: 0.75rem;
             font-weight: 600;
             letter-spacing: 0.08em;
@@ -192,15 +239,26 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
         .badge::before {
             content: '';
             width: 6px; height: 6px;
+<<<<<<< HEAD
             background: var(--brown);
             border-radius: 50%;
             box-shadow: 0 0 8px var(--brown);
+=======
+            background: var(--lava);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--lava);
+>>>>>>> 04312585559daad918654f8850ba8079f14ab852
             animation: pulse 2s ease-in-out infinite;
         }
 
         @keyframes pulse {
+<<<<<<< HEAD
             0%, 100% { opacity: 1; box-shadow: 0 0 8px var(--brown); }
             50% { opacity: 0.5; box-shadow: 0 0 3px var(--brown); }
+=======
+            0%, 100% { opacity: 1; box-shadow: 0 0 8px var(--lava); }
+            50% { opacity: 0.5; box-shadow: 0 0 3px var(--lava); }
+>>>>>>> 04312585559daad918654f8850ba8079f14ab852
         }
 
         .hero h1 {
@@ -211,7 +269,11 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
             margin-bottom: 1.5rem;
         }
 
+<<<<<<< HEAD
         .hero h1 .word-lava { color: var(--brown); }
+=======
+        .hero h1 .word-lava { color: var(--lava); }
+>>>>>>> 04312585559daad918654f8850ba8079f14ab852
         .hero h1 .word-lust {
             color: transparent;
             -webkit-text-stroke: 1.5px rgba(255,255,255,0.3);
@@ -250,6 +312,7 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
         }
 
         .btn-primary {
+<<<<<<< HEAD
             background: var(--brown);
             color: #fff;
             box-shadow: 0 0 0 0 var(--brown-glow);
@@ -258,6 +321,16 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
         .btn-primary:hover {
             background: var(--brown-dim);
             box-shadow: 0 0 30px var(--brown-glow-strong), 0 4px 15px rgba(0,0,0,0.3);
+=======
+            background: var(--lava);
+            color: #fff;
+            box-shadow: 0 0 0 0 var(--lava-glow);
+        }
+
+        .btn-primary:hover {
+            background: var(--lava-dim);
+            box-shadow: 0 0 30px var(--lava-glow-strong), 0 4px 15px rgba(0,0,0,0.3);
+>>>>>>> 04312585559daad918654f8850ba8079f14ab852
             transform: translateY(-1px);
         }
 
@@ -296,7 +369,11 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
             line-height: 1;
         }
 
+<<<<<<< HEAD
         .stat-value span { color: var(--brown); }
+=======
+        .stat-value span { color: var(--lava); }
+>>>>>>> 04312585559daad918654f8850ba8079f14ab852
 
         .stat-label {
             font-size: 0.78rem;
@@ -318,7 +395,11 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
             font-family: var(--mono);
             font-size: 0.72rem;
             font-weight: 500;
+<<<<<<< HEAD
             color: var(--brown);
+=======
+            color: var(--lava);
+>>>>>>> 04312585559daad918654f8850ba8079f14ab852
             text-transform: uppercase;
             letter-spacing: 0.12em;
             margin-bottom: 0.75rem;
@@ -365,7 +446,11 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
             position: absolute;
             top: 0; left: 0; right: 0;
             height: 1px;
+<<<<<<< HEAD
             background: linear-gradient(90deg, transparent, var(--brown-glow-strong), transparent);
+=======
+            background: linear-gradient(90deg, transparent, var(--lava-glow-strong), transparent);
+>>>>>>> 04312585559daad918654f8850ba8079f14ab852
             opacity: 0;
             transition: opacity 0.3s;
         }
@@ -474,10 +559,17 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
         .dir-item:hover {
             border-color: var(--border-hot);
             color: var(--text);
+<<<<<<< HEAD
             background: rgba(111,78,55,0.05);
         }
 
         .dir-item .dir-icon { color: var(--brown); font-size: 0.9rem; }
+=======
+            background: rgba(221,72,20,0.05);
+        }
+
+        .dir-item .dir-icon { color: var(--lava); font-size: 0.9rem; }
+>>>>>>> 04312585559daad918654f8850ba8079f14ab852
 
         /* ── FOOTER ── */
         footer {
@@ -520,7 +612,11 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
             transition: color 0.2s;
         }
 
+<<<<<<< HEAD
         .footer-links a:hover { color: var(--brown); }
+=======
+        .footer-links a:hover { color: var(--lava); }
+>>>>>>> 04312585559daad918654f8850ba8079f14ab852
 
         /* ── DIVIDER ── */
         .divider {
