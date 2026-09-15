@@ -8,6 +8,7 @@ class ProductController extends Controller
         if (session_status() !== PHP_SESSION_ACTIVE) {
             session_start();
         }
+        $this->call->database();
         $this->call->model('ProductModel');
     }
 
@@ -38,7 +39,9 @@ class ProductController extends Controller
             'action' => site_url('products/create'),
             'product' => [],
             'submit_label' => 'Create product',
+            'message' => $_SESSION['product_message'] ?? null,
         ]);
+        unset($_SESSION['product_message']);
     }
 
     public function store()
@@ -47,7 +50,13 @@ class ProductController extends Controller
         if ($data === false) {
             return;
         }
-        ProductModel::insert($data);
+        try {
+            ProductModel::insert($data);
+        } catch (Throwable $exception) {
+            $_SESSION['product_message'] = 'Unable to create product: ' . $exception->getMessage();
+            redirect('products/create');
+            return;
+        }
         $_SESSION['product_message'] = 'Product created.';
         redirect('products');
     }
@@ -73,14 +82,26 @@ class ProductController extends Controller
         if ($data === false) {
             return;
         }
-        ProductModel::update((int) $id, $data);
+        try {
+            ProductModel::update((int) $id, $data);
+        } catch (Throwable $exception) {
+            $_SESSION['product_message'] = 'Unable to update product: ' . $exception->getMessage();
+            redirect('products/edit/' . (int) $id);
+            return;
+        }
         $_SESSION['product_message'] = 'Product updated.';
         redirect('products');
     }
 
     public function delete($id)
     {
-        ProductModel::delete((int) $id);
+        try {
+            ProductModel::delete((int) $id);
+        } catch (Throwable $exception) {
+            $_SESSION['product_message'] = 'Unable to delete product: ' . $exception->getMessage();
+            redirect('products');
+            return;
+        }
         $_SESSION['product_message'] = 'Product deleted.';
         redirect('products');
     }
