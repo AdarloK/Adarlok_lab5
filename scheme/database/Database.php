@@ -271,6 +271,11 @@ class Database {
         if ($driver === 'mysql' && defined('PDO::MYSQL_ATTR_SSL_CA')) {
             $ssl_ca = getenv('DB_SSL_CA');
             if ($ssl_ca) {
+                if (strpos($ssl_ca, '-----BEGIN CERTIFICATE-----') !== false) {
+                    $ssl_file = tempnam(sys_get_temp_dir(), 'aiven-ca-');
+                    file_put_contents($ssl_file, str_replace('\\n', PHP_EOL, $ssl_ca));
+                    $ssl_ca = $ssl_file;
+                }
                 $options[PDO::MYSQL_ATTR_SSL_CA] = $ssl_ca;
             }
             if (defined('PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT')) {
